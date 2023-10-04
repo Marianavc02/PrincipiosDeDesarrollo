@@ -476,7 +476,7 @@ public MyPanel() {
           }
         }
         if(!found){
-            System.out.println("No tenemos mascota con esas caracteristicas, intenta con otras"+"\n");
+            System.out.println("No tenemos mascota con esas caracteristicas, intenta con otras o te enviaremos un correo cuando encontremos una con esas caracteristicas"+"\n");
         }
     }
     catch (Exception ex) {
