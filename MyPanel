@@ -378,7 +378,7 @@ public MyPanel() {
                     FileWriter writer = new FileWriter("BD_adoptantes.txt",true);                        
                     writer.write(datos_guardar_adopcion);
                     writer.close();
-                    //RS21
+                    //RS21 y RP13
                     JOptionPane.showMessageDialog(this, "Tu información será revisada por la fundación correspondiente. Pronto nos contactaremos contigo a "+informacion_correo_adopcion +" o al número "+informacion_celular_adopcion);
                     //limpiamos campos de texto
                     nombre_adopcion.setText("");  
@@ -475,6 +475,7 @@ public MyPanel() {
             
           }
         }
+            //RS18
         if(!found){
             System.out.println("No tenemos mascota con esas caracteristicas, intenta con otras o te enviaremos un correo cuando encontremos una con esas caracteristicas"+"\n");
         }
