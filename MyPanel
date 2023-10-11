@@ -19,6 +19,7 @@ import java.io.BufferedReader;
 
 //paso 1 agregar implements
 public class MyPanel extends JPanel implements ActionListener, ItemListener {
+    //RNF27
     private JButton registro_boton;
     private JButton inicio_boton;
     private JButton from_buscar;
