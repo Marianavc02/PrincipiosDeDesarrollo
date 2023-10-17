@@ -359,7 +359,7 @@ public MyPanel() {
                         JOptionPane.showMessageDialog(this,informacion_contrasena_registro);
                         
                         
-                        if(informacion_usuario_inicio.equals(informacion_usuario_registro) && informacion_contra_inicio.equals(informacion_contrasena_registro)){
+                        if(informacion_usuario_inicio.equals(usuario_inicio_bd) && informacion_contra_inicio.equals(contrasena_inicio_bd)){
                             //RS20
                             System.out.println("Bienvenido/a");
                             form_gustos.setEnabled(true);
