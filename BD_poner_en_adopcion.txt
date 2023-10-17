@@ -1,0 +1,11 @@
+
+Edad: 15 meses
+Sexo: hembra
+Tamaño: mediano
+Color: cafe
+
+Edad: 1 mes
+Sexo: macho
+Tamaño: grande
+Color: blanco
+

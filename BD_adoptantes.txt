@@ -1,0 +1,18 @@
+Nombre: daniela
+Direccion: calle 12
+Celular: 123456789
+Correo: daniela@gmail.com
+Nombre: jorge
+Direccion: calle 20
+Celular: 123455
+Correo: jorge@gmail.com
+
+Nombre: Seleny
+Direccion: calle 80
+Celular: 123456
+Correo: seleny@gmail.com
+
+Nombre: alex
+Direccion: calle 23
+Celular: 548641
+Correo: alex@gmail.com
