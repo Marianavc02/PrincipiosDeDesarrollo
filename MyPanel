@@ -137,13 +137,16 @@ public MyPanel() {
         sexo_poner_adopcion = new JTextField (5);
         tamanio_poner_adopcion = new JTextField (5);
         color_poner_adop = new JTextField (5);
+        //RS17
         mision_capt = new JLabel ("Misión");
         vision_capt = new JLabel ("Visión");
         mision = new JLabel ("Conectar personas y animales a través de la adopción responsable. ");
         jcomp48 = new JLabel ("Un mundo donde cada animal tenga un hogar lleno de amor.");
+        //RS23
         rs_capt = new JLabel ("Redes sociales");
         rs_Insta = new JLabel ("Instagram");
         rs_face_capt = new JLabel ("Fundación Huellas Solidarias");
+        //RS19
         contacto = new JLabel ("Contacto");
         num_cont = new JLabel ("315 367 4857");
 
