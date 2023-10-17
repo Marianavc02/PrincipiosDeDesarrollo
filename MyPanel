@@ -354,9 +354,9 @@ public MyPanel() {
                 while ((linea=br.readLine())!=null){
                     if (!linea.equals(" ")){
                         String[] lista = linea.split(",");
-                        String informacion_usuario_registro = lista[0];
-                        String informacion_contrasena_registro = lista[1];
-                        JOptionPane.showMessageDialog(this,informacion_contrasena_registro);
+                        String usuario_inicio_bd = lista[1];
+                        String contrasena_inicio_bd = lista[2];
+                        //JOptionPane.showMessageDialog(this,informacion_contrasena_registro);
                         
                         
                         if(informacion_usuario_inicio.equals(usuario_inicio_bd) && informacion_contra_inicio.equals(contrasena_inicio_bd)){
