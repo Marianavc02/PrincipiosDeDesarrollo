@@ -64,6 +64,15 @@ public class MyPanel extends JPanel implements ActionListener, ItemListener {
     private JTextField sexo_poner_adopcion;
     private JTextField tamanio_poner_adopcion;
     private JTextField color_poner_adop;
+    private JLabel mision_capt;
+    private JLabel vision_capt;
+    private JLabel mision;
+    private JLabel jcomp48;
+    private JLabel rs_capt;
+    private JLabel rs_Insta;
+    private JLabel rs_face_capt;
+    private JLabel contacto;
+    private JLabel num_cont;
     
     // Definir variables globales
     String personalidadSeleccionada = "";
@@ -128,6 +137,15 @@ public MyPanel() {
         sexo_poner_adopcion = new JTextField (5);
         tamanio_poner_adopcion = new JTextField (5);
         color_poner_adop = new JTextField (5);
+        mision_capt = new JLabel ("Misión");
+        vision_capt = new JLabel ("Visión");
+        mision = new JLabel ("Conectar personas y animales a través de la adopción responsable. ");
+        jcomp48 = new JLabel ("Un mundo donde cada animal tenga un hogar lleno de amor.");
+        rs_capt = new JLabel ("Redes sociales");
+        rs_Insta = new JLabel ("Instagram");
+        rs_face_capt = new JLabel ("Fundación Huellas Solidarias");
+        contacto = new JLabel ("Contacto");
+        num_cont = new JLabel ("315 367 4857");
 
         //adjust size and set layout
         setPreferredSize (new Dimension (944, 563));
@@ -187,6 +205,15 @@ public MyPanel() {
         add (sexo_poner_adopcion);
         add (tamanio_poner_adopcion);
         add (color_poner_adop);
+        add (mision_capt);
+        add (vision_capt);
+        add (mision);
+        add (jcomp48);
+        add (rs_capt);
+        add (rs_Insta);
+        add (rs_face_capt);
+        add (contacto);
+        add (num_cont);
 
         //set component bounds (only needed by Absolute Positioning)
         registro_boton.setBounds (68, 160, 105, 25);
@@ -233,6 +260,15 @@ public MyPanel() {
         tamanio_poner_adopcion.setBounds (600, 325, 100, 25);
         color_poner_adop.setBounds (600, 365, 100, 25);
         poner_adopcion_boton.setBounds (570, 414, 100, 25);
+        mision_capt.setBounds (30, 475, 100, 25);
+        vision_capt.setBounds (30, 510, 100, 25);
+        mision.setBounds (95, 475, 395, 30);
+        jcomp48.setBounds (95, 510, 350, 25);
+        rs_capt.setBounds (715, 475, 100, 25);
+        rs_Insta.setBounds (635, 500, 100, 25);
+        rs_face_capt.setBounds (710, 500, 180, 25);
+        contacto.setBounds (640, 525, 100, 25);
+        num_cont.setBounds (710, 525, 100, 25);
         
         
         
