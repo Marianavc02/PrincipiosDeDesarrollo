@@ -1,0 +1,68 @@
+import java.io.FileWriter;
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+
+public class Mascota
+{
+    public static void buscar (String personalidadSeleccionada,String colorSeleccionado,String tamanioSeleccionado,String sexoSeleccionado){
+       
+        // abrir - leer - buscar
+          File archivo = null;
+          FileReader fr = null;
+          BufferedReader br = null;
+          
+        try {
+            // Apertura del fichero y creacion de BufferedReader para poder
+             // hacer una lectura comoda (disponer del metodo readLine()).
+             //RP12
+             archivo = new File ("BD_mascotas.txt");
+             fr = new FileReader (archivo);
+             br = new BufferedReader(fr);
+
+             // Lectura del fichero
+             String linea = br.readLine();
+             boolean found = false;
+             while (linea!=null){
+                 //declar variables
+            String[] lista=linea.split("-");
+            
+            String mascota=lista[0];
+            String personalidad = lista[1];      
+            String color = lista[2];
+            String tamanio = lista[3];
+            String sexo= lista[4];
+            //RS16
+
+            if(personalidadSeleccionada.equals(personalidad)&&colorSeleccionado.equals(color)&&tamanioSeleccionado.equals(tamanio)&&sexoSeleccionado.equals(sexo)){
+                System.out.println("mascota encontrada: "+mascota+"\n");
+                found = true;
+                break;
+          }else{
+            linea = br.readLine();
+            
+          }
+        }
+            //RS18
+        if(!found){
+            System.out.println("No tenemos mascota con esas caracteristicas, intenta con otras o te enviaremos un correo cuando encontremos una con esas caracteristicas"+"\n");
+        }
+    }
+    catch (Exception ex) {
+        ex.printStackTrace();
+    }finally{ 
+        // En el finally cerramos el fichero, para asegurarnos
+         // que se cierra tanto si todo va bien como si salta 
+         // una excepcion.
+        try{
+             if( null != fr ){   
+               fr.close();     
+            }  
+        }catch (Exception e2){ 
+            e2.printStackTrace();
+            }
+        }
+    }
+}
