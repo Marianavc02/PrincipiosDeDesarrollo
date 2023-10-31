@@ -141,7 +141,7 @@ public MyPanel() {
         mision_capt = new JLabel ("Misión");
         vision_capt = new JLabel ("Visión");
         mision = new JLabel ("Conectar personas y animales a través de la adopción responsable. ");
-        jcomp48 = new JLabel ("Un mundo donde cada animal tenga un hogar lleno de amor.");
+        jcomp48 = new JLabel ("Un mundo donde cada animal tenga un hogar lleno de amor.");
         //RS23
         rs_capt = new JLabel ("Redes sociales");
         rs_Insta = new JLabel ("Instagram");
@@ -287,108 +287,44 @@ public MyPanel() {
         form_sexo.setEnabled(false);
         from_buscar.setEnabled(false);
     }
-    
+ 
+ 
     public void actionPerformed(ActionEvent e) {
         //RE4
     if (e.getSource() == registro_boton) {
-            //1. obtener información 
+        
             String informacion_nombre_registro = nombre_registro.getText();
             informacion_usuario_registro = usuario_registro.getText();
             informacion_contrasena_registro = contrasena_registro.getText();
-            // prolema de asignacion de variable
+            Usuario.registrar(informacion_nombre_registro,informacion_usuario_registro, informacion_contrasena_registro);
             JOptionPane.showMessageDialog(this, "Querido/a " + informacion_usuario_registro + " su cuenta ha sido creada");
-            //2.buscar la BD
-            //RP14
-            //3.Guardar info
-            //RE10
-            File f= new File ("BD_usuarios.txt");
-            FileWriter writer = null;
-            PrintWriter pw = null;
-            
-            if (!f.exists()){
-                try {
-                    f.createNewFile();
-                }catch(IOException exception){
-                    System.err.println("Error creando el archivo");
-                }
-            }
-            try {
-                writer = new FileWriter("BD_usuarios.txt",true);
-                pw = new PrintWriter (writer);
-                pw.println(informacion_nombre_registro + "," + informacion_usuario_registro + "," + informacion_contrasena_registro);
-            }catch (IOException exception){
-                System.err.println("Error abriendo el archivo");
-            }finally{
-                try{
-                    if (null != writer)
-                       writer.close();
-                }catch (Exception e2){
-                    e2.printStackTrace();
-                }
-            } 
         }
+        
         
     if (e.getSource() == inicio_boton) {
-        //RE6
+           //RE6
             String informacion_usuario_inicio = usuario_inicio.getText();
             String informacion_contra_inicio = contra_inicio.getText();
-            //me arroja contra y usuarios
-            JOptionPane.showMessageDialog(this,informacion_contra_inicio); 
-        
-            File archivo = null;
-            FileReader fr = null;
-            BufferedReader br = null;
-            //2.buscar la BD
-            //RP14
-            //3.Guardar info
-            try{
-                // apertura del fichero y creacion de bufferedReader para poder leerlo
-                archivo = new File ("BD_usuarios.txt");
-                fr = new FileReader (archivo);
-                br = new BufferedReader(fr);
-                //JOptionPane.showMessageDialog(this,informacion_contrasena_registro);
-                
-                // lectura del fichero
-                
-                String linea;
-                while ((linea=br.readLine())!=null){
-                    if (!linea.equals(" ")){
-                        String[] lista = linea.split(",");
-                        String usuario_inicio_bd = lista[1];
-                        String contrasena_inicio_bd = lista[2];
-                        //JOptionPane.showMessageDialog(this,informacion_contrasena_registro);
-                        
-                        
-                        if(informacion_usuario_inicio.equals(usuario_inicio_bd) && informacion_contra_inicio.equals(contrasena_inicio_bd)){
-                            //RS20
-                            System.out.println("Bienvenido/a");
-                            form_gustos.setEnabled(true);
-                            personalidad_capt.setEnabled(true);
-                            color_capt.setEnabled(true);
-                            tamanio_capt.setEnabled(true);
-                            sexo_capt.setEnabled(true);
-                            form_per.setEnabled(true);
-                            form_color.setEnabled(true);
-                            form_tamanio.setEnabled(true);
-                            form_sexo.setEnabled(true);
-                            from_buscar.setEnabled(true);
-                            break;
-                            
-                        }
-                    }
-                }
-            }catch(Exception ex){
-                ex.printStackTrace();
-        }finally{
-              try{
-                if (null!= fr){
-                    fr.close();
-                }
-            }catch (Exception e2){
-                e2.printStackTrace();
-            }
+            JOptionPane.showMessageDialog(this,informacion_usuario_inicio); 
+            boolean usuarioRegistrado = Usuario.iniciarSesion(informacion_usuario_inicio,informacion_contra_inicio); 
+            
+            if(usuarioRegistrado == true){
+                //RS20
+                JOptionPane.showMessageDialog(this,"bienvenido/a"); 
+                form_gustos.setEnabled(true);
+                personalidad_capt.setEnabled(true);
+                color_capt.setEnabled(true);
+                tamanio_capt.setEnabled(true);
+                sexo_capt.setEnabled(true);
+                form_per.setEnabled(true);
+                form_color.setEnabled(true);
+                form_tamanio.setEnabled(true);
+                form_sexo.setEnabled(true);
+                from_buscar.setEnabled(true);
         }
     }
+    
+    
     if (e.getSource() == adopcion_boton) {
         
             //1.obtener la info de los campos de texto
@@ -398,79 +334,61 @@ public MyPanel() {
             String informacion_celular_adopcion = celular_adopcion.getText();
             String informacion_correo_adopcion = correo_adopcion.getText();
             
-            //condicion de que los campos tienen que estar llenos para que se guarde la informacion en bd
-            if (informacion_nombre_adopcion.isEmpty() ||
+            
+             if (informacion_nombre_adopcion.isEmpty() ||
                 informacion_direccion_adopcion.isEmpty() ||
                 informacion_celular_adopcion.isEmpty() ||
                 informacion_correo_adopcion.isEmpty()) {
                    JOptionPane.showMessageDialog(this, "Por favor llena todos los campos de texto"); 
                 }else{
-                     //2. guardamos todos los datos en un string concatenandolos y  poniendoles un salto de linea
-                     //RPE8
-                    String datos_guardar_adopcion = "\n"+"Nombre: " + informacion_nombre_adopcion +"\n"+
-                                                    "Direccion: " + informacion_direccion_adopcion + "\n"+
-                                                    "Celular: " + informacion_celular_adopcion +"\n"+
-                                                    "Correo: " + informacion_correo_adopcion;
-                    String ruta_bd_adoptantes = "BD_adoptantes.txt";
-                //try para leer y guardar datos, y catch para manejar problema si hay un error al intentar escribir en el archivo
-                    try{
-                    //creamos clase filewriter para que los datos se guarden en un archivo de forma continua
-                    FileWriter writer = new FileWriter("BD_adoptantes.txt",true);                        
-                    writer.write(datos_guardar_adopcion);
-                    writer.close();
                     //RS21 y RP13
-                    JOptionPane.showMessageDialog(this, "Tu información será revisada por la fundación correspondiente. Pronto nos contactaremos contigo a "+informacion_correo_adopcion +" o al número "+informacion_celular_adopcion);
-                    //limpiamos campos de texto
+                    boolean adoptante=Usuario.adoptar(informacion_nombre_adopcion,informacion_direccion_adopcion,informacion_celular_adopcion,informacion_correo_adopcion);
+                    if(adoptante=true){
+                       JOptionPane.showMessageDialog(this, "Tu información será revisada por la fundación correspondiente. Pronto nos contactaremos contigo a "+informacion_correo_adopcion +" o al número "+informacion_celular_adopcion); 
+                    }else{
+                        if(adoptante=false){
+                            JOptionPane.showMessageDialog(this,"Ha ocurrido un error, intentelo de nuevo");
+                        }
+                    }
+                }
+                //limpiamos campos de texto
                     nombre_adopcion.setText("");  
                     direccion_adopcion.setText(""); 
                     celular_adopcion.setText(""); 
                     correo_adopcion.setText("");
-                    //manejo de excepciones/errores
-                    } catch(IOException ex) {
-               ex.printStackTrace();
-               JOptionPane.showMessageDialog(this,"Ha ocurrido un error, intentelo de nuevo");
-               }    
-                }
         }
+     
+        
         if (e.getSource() == poner_adopcion_boton) {
             //RE2
            String informacion_edad_poner_adopcion = edad_poner_adopcion.getText();
            String informacion_sexo_poner_adopcion = sexo_poner_adopcion.getText();
            String informacion_tamanio_poner_adopcion = tamanio_poner_adopcion.getText();
            String informacion_color_poner_adop = color_poner_adop.getText();
-
-           if (informacion_edad_poner_adopcion.isEmpty() ||
-               informacion_sexo_poner_adopcion.isEmpty() ||
-               informacion_tamanio_poner_adopcion.isEmpty() ||
-               informacion_color_poner_adop.isEmpty()){
-                   JOptionPane.showMessageDialog(this, "Por favor llena todos los campos de texto");
+           
+            if (informacion_edad_poner_adopcion.isEmpty() ||
+                informacion_sexo_poner_adopcion.isEmpty() ||
+                informacion_tamanio_poner_adopcion.isEmpty() ||
+                informacion_color_poner_adop.isEmpty()){
+                 JOptionPane.showMessageDialog(this, "Por favor llena todos los campos de texto");
                    
-           } else{
-               //RPE9
-           String datos_guardar_poner_adopcion = "Edad: " + informacion_edad_poner_adopcion + "\n" +
-                                                 "Sexo: " + informacion_sexo_poner_adopcion + "\n" +
-                                                 "Tamaño: " + informacion_tamanio_poner_adopcion + "\n" +
-                                                 "Color: " + informacion_color_poner_adop + "\n" +
-                                                 "\n";
-           String ruta_bd_poner_adopcion = "BD_poner_en_adopcion.txt";
-           try {
-               FileWriter writer = new FileWriter(ruta_bd_poner_adopcion,true);
-               writer.write(datos_guardar_poner_adopcion);
-               writer.close();
-               //RS21
-               JOptionPane.showMessageDialog(this, "Tu información será enviada a las fundaciones, las cuales se pondrán en contacto contigo prontamente");
-               
+           }else{
+              boolean darAdopcion=Usuario.darEnAdopcion(informacion_edad_poner_adopcion,informacion_sexo_poner_adopcion,informacion_tamanio_poner_adopcion,informacion_color_poner_adop); 
+               if(darAdopcion=true){
+                   //RS21 y RP13
+                JOptionPane.showMessageDialog(this, "Tu información será enviada a las fundaciones, las cuales se pondrán en contacto contigo prontamente");
+                }else{
+                    JOptionPane.showMessageDialog(this,"Ha ocurrido un error, intentelo de nuevo");
+                }
+            }
+           //limpiamos  los campos de texto
                edad_poner_adopcion.setText("");
                sexo_poner_adopcion.setText("");
                tamanio_poner_adopcion.setText("");
-               color_poner_adop.setText("");
-           } catch (IOException ex) {
-               ex.printStackTrace();
-               JOptionPane.showMessageDialog(this,"Ha ocurrido un error, intentelo de nuevo");
-               }
-           }
-            
+               color_poner_adop.setText("");    
     }
+    
+    
         if (e.getSource() == from_buscar) {
             // 1. Traer las características del formulario -> variables globales
             //RE3
@@ -478,62 +396,8 @@ public MyPanel() {
           System.out.println("Color seleccionada: " + colorSeleccionado);
           System.out.println("Tamaño seleccionado: " + tamanioSeleccionado);
           System.out.println("Sexo seleccionado: " + sexoSeleccionado);
-          
-          // abrir - leer - buscar
-          File archivo = null;
-          FileReader fr = null;
-          BufferedReader br = null;
-          
-          try {
-            // Apertura del fichero y creacion de BufferedReader para poder
-             // hacer una lectura comoda (disponer del metodo readLine()).
-             //RP12
-             archivo = new File ("BD_mascotas.txt");
-             fr = new FileReader (archivo);
-             br = new BufferedReader(fr);
-
-             // Lectura del fichero
-             String linea = br.readLine();
-             boolean found = false;
-             while (linea!=null){
-                 //declar variables
-            String[] lista=linea.split("-");
-            
-            String mascota=lista[0];
-            String personalidad = lista[1];      
-            String color = lista[2];
-            String tamanio = lista[3];
-            String sexo= lista[4];
-            //RS16
-
-            if(personalidadSeleccionada.equals(personalidad)&&colorSeleccionado.equals(color)&&tamanioSeleccionado.equals(tamanio)&&sexoSeleccionado.equals(sexo)){
-                System.out.println("mascota encontrada: "+mascota+"\n");
-                found = true;
-                break;
-          }else{
-            linea = br.readLine();
-            
-          }
-        }
-            //RS18
-        if(!found){
-            System.out.println("No tenemos mascota con esas caracteristicas, intenta con otras o te enviaremos un correo cuando encontremos una con esas caracteristicas"+"\n");
-        }
-    }
-    catch (Exception ex) {
-        ex.printStackTrace();
-    }finally{ 
-        // En el finally cerramos el fichero, para asegurarnos
-         // que se cierra tanto si todo va bien como si salta 
-         // una excepcion.
-        try{
-             if( null != fr ){   
-               fr.close();     
-            }  
-        }catch (Exception e2){ 
-            e2.printStackTrace();
-            }
-        }
+          Mascota.buscar(personalidadSeleccionada,colorSeleccionado,tamanioSeleccionado,sexoSeleccionado);
+         
     }
 }
 
