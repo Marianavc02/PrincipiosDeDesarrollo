@@ -304,8 +304,7 @@ public MyPanel() {
     if (e.getSource() == inicio_boton) {
            //RE6
             String informacion_usuario_inicio = usuario_inicio.getText();
-            String informacion_contra_inicio = contra_inicio.getText();
-            JOptionPane.showMessageDialog(this,informacion_usuario_inicio); 
+            String informacion_contra_inicio = contra_inicio.getText(); 
             boolean usuarioRegistrado = Usuario.iniciarSesion(informacion_usuario_inicio,informacion_contra_inicio); 
             
             if(usuarioRegistrado == true){
