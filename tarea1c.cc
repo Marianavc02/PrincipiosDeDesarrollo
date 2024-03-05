@@ -8,4 +8,5 @@ int tarea1(int argc, char* argv[]) {
     } else {
         std::cout << "Error no se ingresaron argumentos" << std::endl;
     }
+    return 0;
 }
